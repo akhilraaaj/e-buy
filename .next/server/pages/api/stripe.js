@@ -1,35 +1,80 @@
 "use strict";
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (() => {
 var exports = {};
-exports.id = "pages/api/stripe";
-exports.ids = ["pages/api/stripe"];
+exports.id = 475;
+exports.ids = [475];
 exports.modules = {
 
-/***/ "stripe":
-/*!*************************!*\
-  !*** external "stripe" ***!
-  \*************************/
-/***/ ((module) => {
-
-module.exports = require("stripe");
-
-/***/ }),
-
-/***/ "(api)/./pages/api/stripe.js":
-/*!*****************************!*\
-  !*** ./pages/api/stripe.js ***!
-  \*****************************/
+/***/ 5253:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ handler)\n/* harmony export */ });\n/* harmony import */ var stripe__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! stripe */ \"stripe\");\n/* harmony import */ var stripe__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(stripe__WEBPACK_IMPORTED_MODULE_0__);\n\nconst stripe = new (stripe__WEBPACK_IMPORTED_MODULE_0___default())(\"sk_test_51MjgS0SGTKp4VhON3mFL2lXuITKr9AuaHaSFUhHn6Riwmj2egHXIQvW5DIlQ890ZtJEk5oZ94ep8YsOtJH8AcGa300RQQ77qBq\");\nasync function handler(req, res) {\n    if (req.method === \"POST\") {\n        try {\n            const params = {\n                submit_type: \"pay\",\n                mode: \"payment\",\n                payment_method_types: [\n                    \"card\"\n                ],\n                billing_address_collection: \"auto\",\n                shipping_options: [\n                    {\n                        shipping_rate: \"shr_1MjhgZSGTKp4VhONO5hRNfh4\"\n                    },\n                    {\n                        shipping_rate: \"shr_1MjhieSGTKp4VhONLP5rop0S\"\n                    }\n                ],\n                line_items: req.body.map((item)=>{\n                    const img = item.image[0].asset._ref;\n                    const newImage = img.replace(\"image-\", \"http://cdn.sanity.io/images/f8z5s3ve/production/\").replace(\"-webp\", \".webp\");\n                    return {\n                        price_data: {\n                            currency: \"inr\",\n                            product_data: {\n                                name: item.name,\n                                images: [\n                                    newImage\n                                ]\n                            },\n                            unit_amount: item.price * 100\n                        },\n                        adjustable_quantity: {\n                            enabled: true,\n                            minimum: 1\n                        },\n                        quantity: item.quantity\n                    };\n                }),\n                success_url: `${req.headers.origin}/success`,\n                cancel_url: `${req.headers.origin}/canceled`\n            };\n            const session = await stripe.checkout.sessions.create(params);\n            res.status(200).json(session);\n        } catch (err) {\n            res.status(err.statusCode || 500).json(err.message);\n        }\n    } else {\n        res.setHeader(\"Allow\", \"POST\");\n        res.status(405).end(\"Method Not Allowed\");\n    }\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9wYWdlcy9hcGkvc3RyaXBlLmpzLmpzIiwibWFwcGluZ3MiOiI7Ozs7OztBQUE0QjtBQUU1QixNQUFNQyxTQUFTLElBQUlELCtDQUFNQSxDQUFDRSw2R0FBeUM7QUFFcEQsZUFBZUcsUUFBUUMsR0FBRyxFQUFFQyxHQUFHLEVBQUU7SUFDOUMsSUFBSUQsSUFBSUUsTUFBTSxLQUFLLFFBQVE7UUFDekIsSUFBSTtZQUNBLE1BQU1DLFNBQVM7Z0JBQ1hDLGFBQWE7Z0JBQ2JDLE1BQU07Z0JBQ05DLHNCQUFzQjtvQkFBQztpQkFBTztnQkFDOUJDLDRCQUE0QjtnQkFDNUJDLGtCQUFrQjtvQkFDakI7d0JBQUVDLGVBQWU7b0JBQStCO29CQUNoRDt3QkFBRUEsZUFBZTtvQkFBOEI7aUJBQy9DO2dCQUNMQyxZQUFZVixJQUFJVyxJQUFJLENBQUNDLEdBQUcsQ0FBQyxDQUFDQyxPQUFTO29CQUMvQixNQUFNQyxNQUFNRCxLQUFLRSxLQUFLLENBQUMsRUFBRSxDQUFDQyxLQUFLLENBQUNDLElBQUk7b0JBQ3BDLE1BQU1DLFdBQVdKLElBQUlLLE9BQU8sQ0FBQyxVQUFVLG9EQUFvREEsT0FBTyxDQUFDLFNBQVM7b0JBRTVHLE9BQU87d0JBQ0hDLFlBQVk7NEJBQ1JDLFVBQVU7NEJBQ1ZDLGNBQWM7Z0NBQ1ZDLE1BQU1WLEtBQUtVLElBQUk7Z0NBQ2ZDLFFBQVE7b0NBQUNOO2lDQUFTOzRCQUN0Qjs0QkFDQU8sYUFBYVosS0FBS2EsS0FBSyxHQUFHO3dCQUM5Qjt3QkFDQUMscUJBQXFCOzRCQUNqQkMsU0FBUyxJQUFJOzRCQUNiQyxTQUFTO3dCQUNiO3dCQUNBQyxVQUFVakIsS0FBS2lCLFFBQVE7b0JBQzNCO2dCQUNKO2dCQUNBQyxhQUFhLENBQUMsRUFBRS9CLElBQUlnQyxPQUFPLENBQUNDLE1BQU0sQ0FBQyxRQUFRLENBQUM7Z0JBQzVDQyxZQUFZLENBQUMsRUFBRWxDLElBQUlnQyxPQUFPLENBQUNDLE1BQU0sQ0FBQyxTQUFTLENBQUM7WUFDNUM7WUFFSixNQUFNRSxVQUFVLE1BQU14QyxPQUFPeUMsUUFBUSxDQUFDQyxRQUFRLENBQUNDLE1BQU0sQ0FBQ25DO1lBQ3RERixJQUFJc0MsTUFBTSxDQUFDLEtBQUtDLElBQUksQ0FBQ0w7UUFDckIsRUFBRSxPQUFPTSxLQUFLO1lBQ1p4QyxJQUFJc0MsTUFBTSxDQUFDRSxJQUFJQyxVQUFVLElBQUksS0FBS0YsSUFBSSxDQUFDQyxJQUFJRSxPQUFPO1FBQ3BEO0lBQ0YsT0FBTztRQUNMMUMsSUFBSTJDLFNBQVMsQ0FBQyxTQUFTO1FBQ3ZCM0MsSUFBSXNDLE1BQU0sQ0FBQyxLQUFLTSxHQUFHLENBQUM7SUFDdEIsQ0FBQztBQUNILENBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9lLWJ1eS8uL3BhZ2VzL2FwaS9zdHJpcGUuanM/ZDc4OCJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgU3RyaXBlIGZyb20gJ3N0cmlwZSc7XHJcblxyXG5jb25zdCBzdHJpcGUgPSBuZXcgU3RyaXBlKHByb2Nlc3MuZW52Lk5FWFRfUFVCTElDX1NUUklQRV9TRUNSRVRfS0VZKTtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IGFzeW5jIGZ1bmN0aW9uIGhhbmRsZXIocmVxLCByZXMpIHtcclxuICBpZiAocmVxLm1ldGhvZCA9PT0gJ1BPU1QnKSB7XHJcbiAgICB0cnkge1xyXG4gICAgICAgIGNvbnN0IHBhcmFtcyA9IHtcclxuICAgICAgICAgICAgc3VibWl0X3R5cGU6ICdwYXknLFxyXG4gICAgICAgICAgICBtb2RlOiAncGF5bWVudCcsXHJcbiAgICAgICAgICAgIHBheW1lbnRfbWV0aG9kX3R5cGVzOiBbJ2NhcmQnXSxcclxuICAgICAgICAgICAgYmlsbGluZ19hZGRyZXNzX2NvbGxlY3Rpb246ICdhdXRvJyxcclxuICAgICAgICAgICAgc2hpcHBpbmdfb3B0aW9uczogW1xyXG4gICAgICAgICAgICAgeyBzaGlwcGluZ19yYXRlOiAnc2hyXzFNamhnWlNHVEtwNFZoT05PNWhSTmZoNCcgfSxcclxuICAgICAgICAgICAgIHsgc2hpcHBpbmdfcmF0ZTogJ3Nocl8xTWpoaWVTR1RLcDRWaE9OTFA1cm9wMFMnfSxcclxuICAgICAgICAgICAgXSxcclxuICAgICAgICBsaW5lX2l0ZW1zOiByZXEuYm9keS5tYXAoKGl0ZW0pID0+IHtcclxuICAgICAgICAgICAgY29uc3QgaW1nID0gaXRlbS5pbWFnZVswXS5hc3NldC5fcmVmO1xyXG4gICAgICAgICAgICBjb25zdCBuZXdJbWFnZSA9IGltZy5yZXBsYWNlKCdpbWFnZS0nLCAnaHR0cDovL2Nkbi5zYW5pdHkuaW8vaW1hZ2VzL2Y4ejVzM3ZlL3Byb2R1Y3Rpb24vJykucmVwbGFjZSgnLXdlYnAnLCAnLndlYnAnKTtcclxuICAgICAgICBcclxuICAgICAgICAgICAgcmV0dXJuIHtcclxuICAgICAgICAgICAgICAgIHByaWNlX2RhdGE6IHtcclxuICAgICAgICAgICAgICAgICAgICBjdXJyZW5jeTogJ2lucicsXHJcbiAgICAgICAgICAgICAgICAgICAgcHJvZHVjdF9kYXRhOiB7XHJcbiAgICAgICAgICAgICAgICAgICAgICAgIG5hbWU6IGl0ZW0ubmFtZSxcclxuICAgICAgICAgICAgICAgICAgICAgICAgaW1hZ2VzOiBbbmV3SW1hZ2VdLFxyXG4gICAgICAgICAgICAgICAgICAgIH0sXHJcbiAgICAgICAgICAgICAgICAgICAgdW5pdF9hbW91bnQ6IGl0ZW0ucHJpY2UgKiAxMDAsXHJcbiAgICAgICAgICAgICAgICB9LFxyXG4gICAgICAgICAgICAgICAgYWRqdXN0YWJsZV9xdWFudGl0eToge1xyXG4gICAgICAgICAgICAgICAgICAgIGVuYWJsZWQ6IHRydWUsXHJcbiAgICAgICAgICAgICAgICAgICAgbWluaW11bTogMSxcclxuICAgICAgICAgICAgICAgIH0sXHJcbiAgICAgICAgICAgICAgICBxdWFudGl0eTogaXRlbS5xdWFudGl0eVxyXG4gICAgICAgICAgICB9XHJcbiAgICAgICAgfSksIFxyXG4gICAgICAgIHN1Y2Nlc3NfdXJsOiBgJHtyZXEuaGVhZGVycy5vcmlnaW59L3N1Y2Nlc3NgLFxyXG4gICAgICAgIGNhbmNlbF91cmw6IGAke3JlcS5oZWFkZXJzLm9yaWdpbn0vY2FuY2VsZWRgLFxyXG4gICAgICAgIH1cclxuXHJcbiAgICBjb25zdCBzZXNzaW9uID0gYXdhaXQgc3RyaXBlLmNoZWNrb3V0LnNlc3Npb25zLmNyZWF0ZShwYXJhbXMpOyAgXHJcbiAgICByZXMuc3RhdHVzKDIwMCkuanNvbihzZXNzaW9uKTtcclxuICAgIH0gY2F0Y2ggKGVycikge1xyXG4gICAgICByZXMuc3RhdHVzKGVyci5zdGF0dXNDb2RlIHx8IDUwMCkuanNvbihlcnIubWVzc2FnZSk7XHJcbiAgICB9IFxyXG4gIH0gZWxzZSB7XHJcbiAgICByZXMuc2V0SGVhZGVyKCdBbGxvdycsICdQT1NUJyk7XHJcbiAgICByZXMuc3RhdHVzKDQwNSkuZW5kKCdNZXRob2QgTm90IEFsbG93ZWQnKTtcclxuICB9XHJcbn0iXSwibmFtZXMiOlsiU3RyaXBlIiwic3RyaXBlIiwicHJvY2VzcyIsImVudiIsIk5FWFRfUFVCTElDX1NUUklQRV9TRUNSRVRfS0VZIiwiaGFuZGxlciIsInJlcSIsInJlcyIsIm1ldGhvZCIsInBhcmFtcyIsInN1Ym1pdF90eXBlIiwibW9kZSIsInBheW1lbnRfbWV0aG9kX3R5cGVzIiwiYmlsbGluZ19hZGRyZXNzX2NvbGxlY3Rpb24iLCJzaGlwcGluZ19vcHRpb25zIiwic2hpcHBpbmdfcmF0ZSIsImxpbmVfaXRlbXMiLCJib2R5IiwibWFwIiwiaXRlbSIsImltZyIsImltYWdlIiwiYXNzZXQiLCJfcmVmIiwibmV3SW1hZ2UiLCJyZXBsYWNlIiwicHJpY2VfZGF0YSIsImN1cnJlbmN5IiwicHJvZHVjdF9kYXRhIiwibmFtZSIsImltYWdlcyIsInVuaXRfYW1vdW50IiwicHJpY2UiLCJhZGp1c3RhYmxlX3F1YW50aXR5IiwiZW5hYmxlZCIsIm1pbmltdW0iLCJxdWFudGl0eSIsInN1Y2Nlc3NfdXJsIiwiaGVhZGVycyIsIm9yaWdpbiIsImNhbmNlbF91cmwiLCJzZXNzaW9uIiwiY2hlY2tvdXQiLCJzZXNzaW9ucyIsImNyZWF0ZSIsInN0YXR1cyIsImpzb24iLCJlcnIiLCJzdGF0dXNDb2RlIiwibWVzc2FnZSIsInNldEhlYWRlciIsImVuZCJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(api)/./pages/api/stripe.js\n");
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "default": () => (/* binding */ handler)
+});
+
+;// CONCATENATED MODULE: external "stripe"
+const external_stripe_namespaceObject = require("stripe");
+var external_stripe_default = /*#__PURE__*/__webpack_require__.n(external_stripe_namespaceObject);
+;// CONCATENATED MODULE: ./pages/api/stripe.js
+
+const stripe = new (external_stripe_default())("sk_test_51MjgS0SGTKp4VhON3mFL2lXuITKr9AuaHaSFUhHn6Riwmj2egHXIQvW5DIlQ890ZtJEk5oZ94ep8YsOtJH8AcGa300RQQ77qBq");
+async function handler(req, res) {
+    if (req.method === "POST") {
+        try {
+            const params = {
+                submit_type: "pay",
+                mode: "payment",
+                payment_method_types: [
+                    "card"
+                ],
+                billing_address_collection: "auto",
+                shipping_options: [
+                    {
+                        shipping_rate: "shr_1MjhgZSGTKp4VhONO5hRNfh4"
+                    },
+                    {
+                        shipping_rate: "shr_1MjhieSGTKp4VhONLP5rop0S"
+                    }
+                ],
+                line_items: req.body.map((item)=>{
+                    const img = item.image[0].asset._ref;
+                    const newImage = img.replace("image-", "http://cdn.sanity.io/images/f8z5s3ve/production/").replace("-webp", ".webp");
+                    return {
+                        price_data: {
+                            currency: "inr",
+                            product_data: {
+                                name: item.name,
+                                images: [
+                                    newImage
+                                ]
+                            },
+                            unit_amount: item.price * 100
+                        },
+                        adjustable_quantity: {
+                            enabled: true,
+                            minimum: 1
+                        },
+                        quantity: item.quantity
+                    };
+                }),
+                success_url: `${req.headers.origin}/success`,
+                cancel_url: `${req.headers.origin}/canceled`
+            };
+            const session = await stripe.checkout.sessions.create(params);
+            res.status(200).json(session);
+        } catch (err) {
+            res.status(err.statusCode || 500).json(err.message);
+        }
+    } else {
+        res.setHeader("Allow", "POST");
+        res.status(405).end("Method Not Allowed");
+    }
+}
+
 
 /***/ })
 
@@ -40,7 +85,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__("(api)/./pages/api/stripe.js"));
+var __webpack_exports__ = (__webpack_exec__(5253));
 module.exports = __webpack_exports__;
 
 })();
