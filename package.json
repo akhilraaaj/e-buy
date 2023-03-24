@@ -13,6 +13,7 @@
     "@netlify/plugin-nextjs": "^4.32.2",
     "@sanity/client": "^5.2.2",
     "@sanity/image-url": "^1.0.2",
+    "@sanity/vision": "^3.7.1",
     "@stripe/stripe-js": "^1.48.0",
     "@types/node": "18.14.6",
     "@types/react": "18.0.28",
